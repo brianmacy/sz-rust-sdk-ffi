@@ -1,0 +1,28 @@
+[package]
+name = "sz-rust-sdk-ffi"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+authors = ["Senzing Community"]
+license = "Apache-2.0"
+description = "Senzing low-level FFI/marshaling core: C-ABI bindgen bindings + str<->C helpers + error-taxonomy codegen, shared by sz-rust-sdk and Senzing's in-tree Rust binding layer"
+keywords = ["senzing", "entity-resolution", "ffi"]
+categories = ["api-bindings", "database"]
+repository = "https://github.com/brianmacy/sz-rust-sdk-ffi"
+homepage = "https://senzing.com"
+readme = "README.md"
+
+[lib]
+name = "sz_rust_sdk_ffi"
+crate-type = ["rlib"]
+
+[dependencies]
+libc = "0.2"
+hex = "0.4"
+serde_json = { version = "1", optional = true }
+
+[features]
+codegen = ["dep:serde_json"]
+
+[dev-dependencies]
+bindgen = "0.72"
