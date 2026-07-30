@@ -1,6 +1,6 @@
 [package]
 name = "sz-rust-sdk-ffi"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.88"
 authors = ["Senzing Community"]
@@ -22,6 +22,15 @@ hex = "0.4"
 serde_json = { version = "1", optional = true }
 
 [features]
+default = ["ffi"]
+# The bindgen C-ABI bindings + str<->C helpers. Split from `codegen` so a build-dependency
+# consumer that only needs error-taxonomy codegen (a build.rs has no business linking FFI
+# bindings) can depend with `default-features = false, features = ["codegen"]` and avoid pulling
+# in `helpers::sz_free`'s reference to `SzHelper_free` -- on Windows/MSVC, an unreferenced-at
+# -runtime extern from a dependency crate is NOT reliably dead-stripped at link time the way it is
+# on macOS/Linux, so a codegen-only consumer that accidentally also compiled `ffi`/`helpers` would
+# fail to link with an unresolved external, even though nothing in its own code calls it.
+ffi = []
 codegen = ["dep:serde_json"]
 
 [dev-dependencies]

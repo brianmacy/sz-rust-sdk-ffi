@@ -2,6 +2,16 @@
 
 All notable changes to this crate are documented here.
 
+## [0.1.1] - 2026-07-30
+
+Split the `ffi` (bindings + helpers) and `codegen` features apart (`ffi` is now its own
+default-on feature, separate from `codegen`). Fixes a Windows-only link failure: a
+`codegen`-only consumer (a build.rs / build-dependency) that also compiled the unconditional
+`bindings`/`helpers` modules would fail to link with `unresolved external symbol
+SzHelper_free`, because MSVC does not reliably dead-strip an unreferenced-at-runtime extern
+from a dependency crate the way macOS/Linux linkers do. Build-dependency consumers should now
+use `default-features = false, features = ["codegen"]` — see README.
+
 ## [0.1.0] - 2026-07-30
 
 Initial release. Extracted from:

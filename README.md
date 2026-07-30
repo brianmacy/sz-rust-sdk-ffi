@@ -35,7 +35,10 @@ own error model and build it on top of the classification `codegen` produces.
 sz-rust-sdk-ffi = { git = "https://github.com/brianmacy/sz-rust-sdk-ffi", rev = "<commit-sha>" }
 
 [build-dependencies]
-sz-rust-sdk-ffi = { git = "https://github.com/brianmacy/sz-rust-sdk-ffi", rev = "<commit-sha>", features = ["codegen"] }
+# default-features = false is important here: a build.rs generating the error taxonomy has no
+# business linking FFI bindings, and on Windows an unused `ffi` feature's `SzHelper_free`
+# reference isn't reliably dead-stripped, causing an unresolved-external link failure.
+sz-rust-sdk-ffi = { git = "https://github.com/brianmacy/sz-rust-sdk-ffi", rev = "<commit-sha>", default-features = false, features = ["codegen"] }
 ```
 
 Pin `rev` to a full 40-character commit SHA, not a floating branch/tag — this crate has no
