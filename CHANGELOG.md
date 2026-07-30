@@ -2,6 +2,13 @@
 
 All notable changes to this crate are documented here.
 
+## [0.1.2] - 2026-07-30
+
+CI-only fix: `cargo vet` always runs `cargo metadata --locked` internally regardless of whether
+`--locked` is passed to `cargo vet` itself, so the security-audit workflow failed outright with no
+committed `Cargo.lock` (this is a library crate, no lockfile committed per convention). Added a
+`cargo generate-lockfile` step before it. No source changes.
+
 ## [0.1.1] - 2026-07-30
 
 Split the `ffi` (bindings + helpers) and `codegen` features apart (`ffi` is now its own
