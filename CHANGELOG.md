@@ -11,6 +11,12 @@ committed (pinned to the vetted versions) and the job runs `cargo vet --locked`.
 `.github/dependabot.yml` (cargo + github-actions, daily, 21-day cooldown) matching sz-rust-sdk.
 No source changes.
 
+Supply chain: `cargo vet` now imports the Mozilla, Google, ISRG, Bytecode Alliance, Zcash, Embark,
+Actix, Ariel OS and Fermyon audit sets and has 26 `cargo vet trust` entries for reputable
+publishers (dtolnay, BurntSushi, kennykerr, rust-lang-owner, rust-lang/libc, KodrAus, emilio,
+nagisa, Noratrieb), each noting its evidence. Exemptions regenerated and pruned: 29 fully audited /
+2 exempted (was 0 / 31); each remaining exemption has a `notes` justification.
+
 ## [0.1.2] - 2026-07-30
 
 CI-only fix: `cargo vet` always runs `cargo metadata --locked` internally regardless of whether

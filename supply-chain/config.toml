@@ -34,7 +34,9 @@ url = "https://raw.githubusercontent.com/zcash/rust-ecosystem/main/supply-chain/
 [[exemptions.clang-sys]]
 version = "1.9.1"
 criteria = "safe-to-run"
+notes = "libclang bindings loaded by bindgen; DEV-ONLY (bindgen is a dev-dependency used to check the C header bindings), safe-to-run. Not audited; no imported audit covers 1.9.1. cargo audit (2026-10-25): no advisory. Not covered by trust: publisher madsmtm is not in any imported audit set's [[trusted]] list (checked 2026-10-25) and has no other reputability evidence on record."
 
 [[exemptions.minimal-lexical]]
 version = "0.2.1"
 criteria = "safe-to-run"
+notes = "Float parsing used by nom <- cexpr <- bindgen; DEV-ONLY, safe-to-run. Not audited; imported audits do not cover 0.2.1. cargo audit (2026-10-25): no advisory. Not covered by trust: publisher Alexhuszagh is not in any imported audit set's [[trusted]] list (checked 2026-10-25) and has no other reputability evidence on record."
