@@ -34,4 +34,4 @@ ffi = []
 codegen = ["dep:serde_json"]
 
 [dev-dependencies]
-bindgen = "0.72"
+bindgen = "0.73"
