@@ -9,7 +9,7 @@ version = "1.1.4"
 criteria = "safe-to-run"
 
 [[exemptions.bindgen]]
-version = "0.72.1"
+version = "0.73.2"
 criteria = "safe-to-run"
 
 [[exemptions.bitflags]]
@@ -28,10 +28,6 @@ criteria = "safe-to-run"
 version = "1.9.1"
 criteria = "safe-to-run"
 
-[[exemptions.either]]
-version = "1.17.0"
-criteria = "safe-to-run"
-
 [[exemptions.glob]]
 version = "0.3.4"
 criteria = "safe-to-run"
@@ -40,16 +36,12 @@ criteria = "safe-to-run"
 version = "0.4.3"
 criteria = "safe-to-deploy"
 
-[[exemptions.itertools]]
-version = "0.13.0"
-criteria = "safe-to-run"
-
 [[exemptions.itoa]]
 version = "1.0.18"
 criteria = "safe-to-deploy"
 
 [[exemptions.libc]]
-version = "0.2.189"
+version = "0.2.190"
 criteria = "safe-to-deploy"
 
 [[exemptions.libloading]]
@@ -73,7 +65,7 @@ version = "7.1.3"
 criteria = "safe-to-run"
 
 [[exemptions.prettyplease]]
-version = "0.2.37"
+version = "0.3.0"
 criteria = "safe-to-run"
 
 [[exemptions.proc-macro2]]
@@ -117,11 +109,7 @@ version = "1.0.151"
 criteria = "safe-to-deploy"
 
 [[exemptions.shlex]]
-version = "1.3.0"
-criteria = "safe-to-run"
-
-[[exemptions.syn]]
-version = "2.0.119"
+version = "2.0.1"
 criteria = "safe-to-run"
 
 [[exemptions.syn]]
