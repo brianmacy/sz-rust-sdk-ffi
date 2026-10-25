@@ -2,6 +2,15 @@
 
 All notable changes to this crate are documented here.
 
+## [Unreleased]
+
+CI-only fix: the weekly scheduled Security Audit `vet` job had failed since 2026-08-10 because
+it ran `cargo generate-lockfile` on every run, resolving the newest upstream patch releases
+(e.g. libc 0.2.190, syn 3.0.6), which were not in `supply-chain/config.toml`. `Cargo.lock` is now
+committed (pinned to the vetted versions) and the job runs `cargo vet --locked`. Added
+`.github/dependabot.yml` (cargo + github-actions, daily, 21-day cooldown) matching sz-rust-sdk.
+No source changes.
+
 ## [0.1.2] - 2026-07-30
 
 CI-only fix: `cargo vet` always runs `cargo metadata --locked` internally regardless of whether

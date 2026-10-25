@@ -28,8 +28,11 @@ in-tree Rust binding layer (`senzing-sys` in the `G2` product repo). See `README
 - **Bindgen output is checked in, not build-time generated.** Run
   `cargo run --example generate_bindings` manually after a Senzing header change or SDK upgrade,
   review the diff, and commit `src/bindings.rs`.
-- **No `Cargo.lock` committed** (library crate convention) — `deny.toml`/`security.yml`'s `vet` job
-  intentionally omit `--locked` for that reason. Don't add one back without also updating those.
+- **`Cargo.lock` IS committed** (same as sz-rust-sdk) and `security.yml`'s `vet` job runs
+  `cargo vet --locked`. Without a committed lockfile the job regenerated one each run, so every new
+  upstream patch release drifted past the versions in `supply-chain/config.toml` and the weekly
+  scheduled audit went red. Dependabot (`.github/dependabot.yml`) proposes lockfile bumps; each bump
+  must update the matching `supply-chain` entry in the same PR.
 - **Dependents pin `rev` to a full 40-character commit SHA**, never a floating branch/tag. Tag the
   commit with a human-readable `vX.Y.Z` marker for convenience, but the tag is not what's pinned.
 - **License policy** (`deny.toml`): MIT, Apache-2.0, Unlicense, Unicode-3.0, Zlib only — matches the
