@@ -9,6 +9,8 @@
 //!   Senzing C ABI (checked in, regenerated manually via `cargo run --example generate_bindings`).
 //! - [`helpers`] (feature `ffi`, default-on) — `str`<->C marshaling helpers (buffer ownership/free
 //!   via `SzHelper_free`).
+//! - [`logging`] (feature `ffi`) — bindgen declarations for `libSzLogging.h` (SzLogging callbacks,
+//!   levels, formats, default output), as released in Senzing 4.5.0 (unchanged since 4.3.0).
 //! - [`codegen`] (feature `codegen`) — a build-time helper that turns a `szerrors.json` file into
 //!   generated Rust source for an `SzErrorCategory` enum + `classify(code)` taxonomy. Each
 //!   consumer supplies its own `szerrors.json` path (they may legitimately track different Senzing
@@ -38,6 +40,26 @@ pub mod bindings;
 
 #[cfg(feature = "ffi")]
 pub mod helpers;
+
+/// bindgen-generated declarations for `libSzLogging.h` (feature `ffi`): callback registration,
+/// unregistration, levels, the default formatter and the default output.
+///
+/// Generated from the Senzing 4.5.0 header, whose nine `SzLogging_*` functions are unchanged since
+/// 4.3.0. Only functions present in the released header are declared: a declaration for a symbol
+/// missing from libSz can break linking (notably on Windows). Kept in its own module because its
+/// `SzLogLevel` / `SzLogFormat` / `SzLogCallback` names would clash with consumer types of the
+/// same names. Regenerated with the rest by `cargo run --example generate_bindings`.
+#[cfg(feature = "ffi")]
+// Generated code: silence the lints bindgen output trips (it's not hand-written).
+#[allow(
+    clippy::all,
+    dead_code,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    rustdoc::broken_intra_doc_links
+)]
+pub mod logging;
 
 #[cfg(feature = "codegen")]
 pub mod codegen;
