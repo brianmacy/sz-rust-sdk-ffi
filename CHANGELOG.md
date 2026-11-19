@@ -4,6 +4,17 @@ All notable changes to this crate are documented here.
 
 ## [Unreleased]
 
+Added the `logging` module (feature `ffi`): bindgen declarations for `libSzLogging.h` as released
+in Senzing 4.5.0 (`SzLogging_registerCallback`, `_registerCallbackWithFormat`,
+`_registerThreadLocalCallback`, `_setDefaultCallback`, `_unregisterCallback`, `_setLogLevel`,
+`_getLogLevel`, `_setDefaultFormatter`, `_setDefaultOutput`, plus the `SzLogLevel`,
+`SzLogOutputType`, `SzLogFormat` and `SzLogCallback` types). These nine functions are unchanged
+since Senzing 4.3.0. Only released symbols are declared; the proposed additions
+(`SzLogging_registerCallbackEx`, release hooks, getters, status returns) will be added when a
+Senzing release ships them. `examples/generate_bindings.rs` now also writes `src/logging.rs`.
+`src/bindings.rs` is unchanged (regenerating it against the 4.5.0 headers would add
+`Sz_setBundleArchive*`; that is a separate change).
+
 CI-only fix: the weekly scheduled Security Audit `vet` job had failed since 2026-08-10 because
 it ran `cargo generate-lockfile` on every run, resolving the newest upstream patch releases
 (e.g. libc 0.2.190, syn 3.0.6), which were not in `supply-chain/config.toml`. `Cargo.lock` is now

@@ -19,6 +19,10 @@ exactly the parts that are safe to share:
 - **`bindings`** — bindgen-generated `extern "C"` declarations for the Senzing C ABI, checked in
   and regenerated manually (the C ABI is stable; see `examples/generate_bindings.rs`).
 - **`helpers`** — `str`<->C marshaling helpers (buffer ownership/free via `SzHelper_free`).
+- **`logging`** (feature `ffi`) — bindgen declarations for `libSzLogging.h`, generated from the
+  released Senzing 4.5.0 header (the nine `SzLogging_*` functions, unchanged since 4.3.0). Only
+  symbols present in the released header are declared, so linking against 4.5.0 (or 4.3/4.4)
+  works on every platform.
 - **`codegen`** (feature `codegen`) — a build-time helper that turns a `szerrors.json` file (shipped
   with every Senzing SDK install) into generated Rust source for an `SzErrorCategory` enum and a
   `classify(code)` function. Each consumer supplies its own `szerrors.json` path — they may
@@ -69,7 +73,7 @@ cargo run --example generate_bindings
 
 Requires an installed Senzing SDK (auto-detected via `SENZING_SDK_PATH`, `SENZING_DIR`, or the
 standard Homebrew/Linux install locations). Regenerate after upgrading to a new Senzing SDK
-version, then commit `src/bindings.rs`.
+version, then commit `src/bindings.rs` and `src/logging.rs` (`libSzLogging.h` only).
 
 ## Development
 
