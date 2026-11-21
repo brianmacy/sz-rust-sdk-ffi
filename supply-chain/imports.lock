@@ -49,8 +49,8 @@ user-login = "dtolnay"
 user-name = "David Tolnay"
 
 [[publisher.libc]]
-version = "0.2.190"
-when = "2026-10-02"
+version = "0.2.191"
+when = "2026-10-16"
 trusted-publisher = "github:rust-lang/libc"
 
 [[publisher.libloading]]
